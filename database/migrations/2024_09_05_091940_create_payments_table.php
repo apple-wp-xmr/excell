@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('failed_rows', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('key');
-            $table->unsignedBigInteger('row')->nullable();
-            $table->string('message');
-            $table->foreignId ('task_id')->index()->constrained('tasks');
+            $table->foreignId('project_id')->index()->constrained('projects');
+            $table->string('title');
+            $table->integer('value');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('failed_rows');
+        Schema::dropIfExists('payments');
     }
 };
